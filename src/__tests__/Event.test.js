@@ -8,18 +8,15 @@ describe("<Event /> component", () => {
   beforeAll(() => {
     EventWrapper = shallow(<Event event={mockData[1]} />);
   });
-
   test("render event", () => {
     expect(EventWrapper.find(".event")).toHaveLength(1);
   });
-
   test("render an event summary", () => {
     expect(EventWrapper.find(".summary")).toHaveLength(1);
   });
   test("render an event location", () => {
     expect(EventWrapper.find(".location")).toHaveLength(1);
   });
-
   test("description element is hidden", () => {
     expect(EventWrapper.state("collapsed")).toBe(true);
   });

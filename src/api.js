@@ -1,3 +1,8 @@
+import { mockData } from "./mock-data";
+
+export const getEvents = async () => {
+  return mockData;
+};
 /**
  *
  * This function takes an events array, then uses map to create a new array with only locations.
