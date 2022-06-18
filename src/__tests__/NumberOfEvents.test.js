@@ -12,7 +12,7 @@ describe("<NumberOfEvents /> component", () => {
     expect(NumberOfEventsWrapper.find(".events-number")).toHaveLength(1);
   });
   test("accurate input number of events", () => {
-    let eventsNumber = NumberOfEventsWrapper.prop("eventsNumber");
+    let eventsNumber = NumberOfEventsWrapper.prop("numberOfEvents");
     expect(NumberOfEventsWrapper.find(".events-number").prop("value")).toBe(
       eventsNumber
     );
