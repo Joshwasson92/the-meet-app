@@ -27,7 +27,10 @@ describe("<Event /> component", () => {
     expect(EventWrapper.find(".show-button")).toHaveLength(1);
   });
 
-  test("show event details", () => {
+  test("click show details should collapse or hide event description", () => {
+    EventWrapper.setState({
+      collapsed: true,
+    });
     EventWrapper.find(".show-button").simulate("click");
     expect(EventWrapper.state("collapsed")).toBe(false);
   });

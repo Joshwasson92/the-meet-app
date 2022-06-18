@@ -19,8 +19,6 @@ class Event extends Component {
         <h2 className="summary">{event.summary} </h2>
         <p className="location">{event.location}</p>
         <p className="starting-date">{event.start.dateTime}</p>
-        <br />
-        <br />
         <button className="show-button" onClick={() => this.handleShowClick()}>
           Show Details
         </button>

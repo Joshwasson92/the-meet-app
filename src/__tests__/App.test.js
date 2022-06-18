@@ -3,8 +3,7 @@ import { shallow, mount } from "enzyme";
 import App from "../App";
 import EventList from "../EventList";
 import CitySearch from "../CitySearch";
-import Event from "../Event";
-import { extractLocations } from "../api";
+import { extractLocations, getEvents } from "../api";
 import { mockData } from "../mock-data";
 
 describe("<App /> component", () => {
@@ -20,8 +19,14 @@ describe("<App /> component", () => {
   test("render CitySearch", () => {
     expect(AppWrapper.find(CitySearch)).toHaveLength(1);
   });
-  test("render Event", () => {
-    expect(AppWrapper.find(Event)).toHaveLength(1);
+
+  test('get list of all events when user selects "See all cities"', async () => {
+    const AppWrapper = mount(<App />);
+    const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
+    await suggestionItems.at(suggestionItems.length - 1).simulate("click");
+    const allEvents = await getEvents();
+    expect(AppWrapper.state("events")).toEqual(allEvents);
+    AppWrapper.unmount();
   });
 });
 
