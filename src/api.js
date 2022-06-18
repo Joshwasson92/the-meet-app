@@ -61,6 +61,7 @@ const getEvents = async (max_results = 30) => {
       "/" +
       token;
     const result = await axios.get(url);
+    console.log(result);
     if (result.data) {
       var locations = extractLocations(result.data.events);
       localStorage.setItem("lastEvents", JSON.stringify(result.data));
