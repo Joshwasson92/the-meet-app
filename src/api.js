@@ -33,12 +33,14 @@ const checkToken = async (accessToken) => {
  * The Set will remove all duplicates from the array.
  */
 const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
+  console.log("extractLocations function" + events);
+
+  let extractLocations = events.map((event) => event.location);
+  let locations = [...new Set(extractLocations)];
   return locations;
 };
 
-const getEvents = async (max_results = 30) => {
+const getEvents = async () => {
   NProgress.start();
 
   if (window.location.href.startsWith("http://localhost")) {
@@ -56,19 +58,19 @@ const getEvents = async (max_results = 30) => {
 
   if (token) {
     removeQuery();
-    const url =
+    const results = await axios.get(
       "https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events" +
-      "/" +
-      token;
-    const result = await axios.get(url);
-    console.log(result);
-    if (result.data) {
-      var locations = extractLocations(result.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(result.data));
+        "/" +
+        token
+    );
+    console.log(results);
+    if (results.data) {
+      var locations = extractLocations(results.data.events);
+      localStorage.setItem("lastEvents", JSON.stringify(results.data));
       localStorage.setItem("locations", JSON.stringify(locations));
     }
     NProgress.done();
-    return result.data.events;
+    return results.data.events;
   }
 };
 
@@ -112,4 +114,4 @@ const getToken = async (code) => {
   }
 };
 
-export { getEvents, getAccessToken, extractLocations, getToken, checkToken };
+export { checkToken, extractLocations, getEvents, getAccessToken, getToken };
