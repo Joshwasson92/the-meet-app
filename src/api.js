@@ -33,14 +33,14 @@ const checkToken = async (accessToken) => {
  * The Set will remove all duplicates from the array.
  */
 const extractLocations = (events) => {
-  console.log("extractLocations function" + events);
+  console.log("extractLocations function", events);
 
-  let extractLocations = events.map((event) => event.location);
-  let locations = [...new Set(extractLocations)];
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
   return locations;
 };
 
-const getEvents = async () => {
+const getEvents = async (max_events = 30) => {
   NProgress.start();
 
   if (window.location.href.startsWith("http://localhost")) {
@@ -48,29 +48,26 @@ const getEvents = async () => {
     return { events: mockData, locations: extractLocations(mockData) };
   }
   if (!navigator.onLine) {
-    const data = localStorage.getItem("lastEvents");
+    const { events } = await localStorage.getItem("searchedEvents");
     NProgress.done();
-    return data ? JSON.parse(data).events : [];
+
+    return { events: JSON.parse(events), locations: extractLocations(events) };
   }
 
   const token = await getAccessToken();
-  console.log("getEvents token: ", token);
-
   if (token) {
     removeQuery();
     const results = await axios.get(
-      "https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events" +
-        "/" +
-        token
+      `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}/${max_events}`
     );
     console.log(results);
     if (results.data) {
       var locations = extractLocations(results.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(results.data));
       localStorage.setItem("locations", JSON.stringify(locations));
+      localStorage.setItem("searchedEvents", JSON.stringify(results.data));
     }
     NProgress.done();
-    return results.data.events;
+    return { events: results.data.events, locations };
   }
 };
 
