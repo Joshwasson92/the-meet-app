@@ -27,18 +27,11 @@ const checkToken = async (accessToken) => {
 };
 
 /**
- *
+ * @param {*} events:
  * This function takes an events array, then uses map to create a new array with only locations.
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
  */
-const extractLocations = (events) => {
-  console.log("extractLocations function", events);
-
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
-};
 
 const getEvents = async (max_events = 30) => {
   NProgress.start();
@@ -71,6 +64,14 @@ const getEvents = async (max_events = 30) => {
   }
 };
 
+const extractLocations = (events) => {
+  console.log("extractLocations function", events);
+
+  var extractLocations = events.map((events) => events.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
+
 const getAccessToken = async () => {
   const accessToken = await localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
@@ -92,23 +93,19 @@ const getAccessToken = async () => {
 };
 
 const getToken = async (code) => {
-  try {
-    const encodeCode = encodeURIComponent(code);
+  removeQuery();
+  const encodeCode = encodeURIComponent(code);
+  const { access_token } = await fetch(
+    `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => error);
 
-    const response = await fetch(
-      "https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/token" +
-        "/" +
-        encodeCode
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const { access_token } = await response.json();
-    access_token && localStorage.setItem("access_token", access_token);
-    return access_token;
-  } catch (error) {
-    error.json();
-  }
+  access_token && localStorage.setItem("access_token", access_token);
+
+  return access_token;
 };
 
 export { checkToken, extractLocations, getEvents, getAccessToken, getToken };
