@@ -33,7 +33,7 @@ const checkToken = async (accessToken) => {
  * The Set will remove all duplicates from the array.
  */
 
-const getEvents = async (max_events = 30) => {
+const getEvents = async () => {
   NProgress.start();
 
   if (window.location.href.startsWith("http://localhost")) {
@@ -51,7 +51,7 @@ const getEvents = async (max_events = 30) => {
   if (token) {
     removeQuery();
     const results = await axios.get(
-      `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}/${max_events}`
+      `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`
     );
     console.log(results);
     if (results.data) {
