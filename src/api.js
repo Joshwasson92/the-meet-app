@@ -50,6 +50,7 @@ const getEvents = async () => {
   const token = await getAccessToken();
   if (token) {
     removeQuery();
+
     const results = await axios.get(
       `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`
     );
