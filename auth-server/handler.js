@@ -72,7 +72,6 @@ module.exports.getAccessToken = async (event) => {
   );
   // Decode authorization code extracted from the URL query
   const code = decodeURIComponent(`${event.pathParameters.code}`);
-  console.log("getaccesstoken call:", code);
 
   return new Promise((resolve, reject) => {
     /**
