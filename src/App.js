@@ -11,7 +11,6 @@ class App extends Component {
     events: [],
     locations: [],
     numberOfEvents: [30],
-    selectedLocation: "all",
   };
   componentDidMount() {
     this.mounted = true;
@@ -33,20 +32,6 @@ class App extends Component {
 
     this.updateEvents(this.state.locations, numberOfEvents);
   };
-
-  // updateEvents = (location, eventCounter) => {
-  //   getEvents().then((response) => {
-  //     const locationEvents =
-  //       location === "all"
-  //         ? response.events
-  //         : response.events.filter((event) => event.location === location);
-  //     return this.setState({
-  //       events: events,
-  //       currentLocation: location,
-  //       locations: response.locations,
-  //     });
-  //   });
-  // };
 
   updateEvents = (location, eventCount) => {
     const { currentLocation, numberOfEvents } = this.state;
@@ -80,7 +65,6 @@ class App extends Component {
       });
     }
   };
-
   render() {
     return (
       <div className="App">
@@ -91,7 +75,8 @@ class App extends Component {
         <EventList events={this.state.events} />
         <NumberOfEvents
           events={this.state.numberOfEvents}
-          updateEvents={this.updateEvents}
+          numberOfEvents={this.state.numberOfEvents}
+          updateNumberOfEvents={this.updateNumberOfEvents}
         />
       </div>
     );

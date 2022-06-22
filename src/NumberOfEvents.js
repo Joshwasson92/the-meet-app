@@ -3,33 +3,38 @@ import React, { Component } from "react";
 class NumberOfEvents extends Component {
   constructor() {
     super();
-    this.handleNumberChange = this.handleNumberChange.bind(this);
+    this.handleInputChanged = this.handleInputChanged.bind(this);
     this.state = {
       numberOfEvents: 30,
     };
   }
 
-  handleNumberChange = (events) => {
-    const value = events.target.value;
-    console.log(this.state.numberOfEvents);
+  handleInputChanged = (event) => {
+    const value = event.target.value;
 
-    if (!isNaN(value) && value >= 1) {
-      this.setState({ numberOfEvents: value });
+    if (value <= 0 || value > 32) {
+      this.setState({
+        numberOfEvents: "",
+        infoText: "Please enter a number from 1 to 32",
+      });
     } else {
-      alert("Enter a valid numerical amount.");
-      return this.state.numberOfEvents;
+      this.setState({
+        numberOfEvents: value,
+        infoText: "",
+      });
     }
-    this.props.handleNumberChange(undefined, value);
+    this.props.updateNumberOfEvents(value);
   };
+
   render() {
     return (
-      <div className="numberOfEvents">
-        Number of Events:
+      <div className="NumberOfEvents">
+        <p className="numbercount">Number of events</p>
         <input
-          className="events-number"
           type="number"
-          placeholder={this.state.numberOfEvents}
-          onChange={this.state.handleNumberChange}
+          className="numberinput"
+          onChange={this.handleInputChanged}
+          value={this.state.numberOfEvents}
         />
       </div>
     );
