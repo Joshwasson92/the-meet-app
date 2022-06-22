@@ -57,7 +57,7 @@ const getEvents = async () => {
     );
     console.log(results);
     if (results.data) {
-      var locations = extractLocations(results.data.events);
+      var locations = await extractLocations(results.data.events);
       localStorage.setItem("locations", JSON.stringify(locations));
       localStorage.setItem("searchedEvents", JSON.stringify(results.data));
     }

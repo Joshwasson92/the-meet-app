@@ -13,7 +13,7 @@ class App extends Component {
     numberOfEvents: [30],
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
