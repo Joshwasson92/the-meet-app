@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class NumberOfEvents extends Component {
   constructor() {
     super();
-    this.handleInputChanged = this.handleInputChanged.bind(this);
     this.state = {
       numberOfEvents: 30,
     };

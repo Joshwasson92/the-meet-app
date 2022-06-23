@@ -6,12 +6,14 @@ import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
 import AppSpinner from "./AppSpinner";
+import { getAllByAltText } from "@testing-library/react";
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: [30],
+    location: "all",
   };
 
   async componentDidMount() {
