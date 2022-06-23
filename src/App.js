@@ -15,12 +15,12 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    this.mounted = true;
     await getEvents().then((events) => {
       if (this.mounted) {
         this.setState({ events, locations: extractLocations(events) });
       }
     });
+    this.mounted = true;
   }
 
   componentWillUnmount() {

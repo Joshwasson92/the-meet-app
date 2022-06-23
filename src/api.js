@@ -16,6 +16,14 @@ const removeQuery = () => {
   }
 };
 
+const extractLocations = (events) => {
+  console.log("extractLocations function", events);
+
+  var extractLocations = events.map((events) => events.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
+
 const checkToken = async (accessToken) => {
   console.log("checkToken call", accessToken);
   const result = await fetch(
@@ -57,21 +65,13 @@ const getEvents = async () => {
     );
     console.log(results);
     if (results.data) {
-      var locations = await extractLocations(results.data.events);
+      var locations = extractLocations(results.data.events);
       localStorage.setItem("locations", JSON.stringify(locations));
       localStorage.setItem("searchedEvents", JSON.stringify(results.data));
     }
     NProgress.done();
     return { events: results.data.events, locations };
   }
-};
-
-const extractLocations = (events) => {
-  console.log("extractLocations function", events);
-
-  var extractLocations = events.map((events) => events.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
 };
 
 const getAccessToken = async () => {
