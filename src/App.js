@@ -5,6 +5,7 @@ import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
+import AppSpinner from "./AppSpinner";
 
 class App extends Component {
   state = {
@@ -13,9 +14,9 @@ class App extends Component {
     numberOfEvents: [30],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
+    await getEvents().then((events) => {
       if (this.mounted) {
         this.setState({ events, locations: extractLocations(events) });
       }
@@ -67,20 +68,23 @@ class App extends Component {
     }
   };
   render() {
-    return (
-      <div className="App">
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
-        <EventList events={this.state.events} />
-        <NumberOfEvents
-          events={this.state.numberOfEvents}
-          numberOfEvents={this.state.numberOfEvents}
-          updateNumberOfEvents={this.updateNumberOfEvents}
-        />
-      </div>
-    );
+    if (this.state.events === null) {
+      return <AppSpinner />;
+    } else
+      return (
+        <div className="App">
+          <CitySearch
+            locations={this.state.locations}
+            updateEvents={this.updateEvents}
+          />
+          <EventList events={this.state.events} />
+          <NumberOfEvents
+            events={this.state.numberOfEvents}
+            numberOfEvents={this.state.numberOfEvents}
+            updateNumberOfEvents={this.updateNumberOfEvents}
+          />
+        </div>
+      );
   }
 }
 
