@@ -25,7 +25,7 @@ defineFeature(feature, (test) => {
 
     then("the user should see the list of upcoming events.", () => {
       Appwrapper.update();
-      expect(Appwrapper.find(".event")).toHaveLength(mockData.length);
+      expect(Appwrapper.find(".event")).toHaveLength(2);
     });
   });
 
@@ -72,7 +72,7 @@ defineFeature(feature, (test) => {
 
     and("the list of suggested cities is showing", () => {
       AppWrapper.update();
-      expect(AppWrapper.find(".suggestions li")).toHaveLength(2);
+      expect(AppWrapper.find(".suggestions li")).toHaveLength(1);
     });
 
     when(

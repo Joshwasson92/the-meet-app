@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class CitySearch extends Component {
   state = {
-    query: "See all cities",
+    query: "",
     suggestions: [],
     showSuggestions: undefined,
   };
@@ -17,7 +17,7 @@ class CitySearch extends Component {
       suggestions,
     });
   };
-  handleItemClicked = (suggestion) => {
+  handleItemClicked = (suggestion, eventCount) => {
     this.setState({
       query: suggestion,
       showSuggestions: false,

@@ -17,10 +17,11 @@ const removeQuery = () => {
 };
 
 const extractLocations = (events) => {
-  console.log("extractLocations function", events);
+  console.log("extractLocations function fired", events);
 
   var extractLocations = events.map((events) => events.location);
   var locations = [...new Set(extractLocations)];
+  console.log("after extractLocations is finished", extractLocations);
   return locations;
 };
 
