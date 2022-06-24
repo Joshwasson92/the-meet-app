@@ -23,12 +23,12 @@ class NumberOfEvents extends Component {
         infoText: "Please enter a valid number",
       });
     }
-    this.props.updateNumberOfEvents(value);
+    if (this.props.updateNumberOfEvents) this.props.updateNumberOfEvents(value);
   };
 
   render() {
     return (
-      <div className="NumberOfEvents">
+      <div className="events-number">
         <p className="numbercount">Number of events</p>
         <input
           type="number"

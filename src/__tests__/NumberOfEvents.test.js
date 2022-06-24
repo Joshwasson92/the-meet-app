@@ -9,7 +9,7 @@ describe("<NumberOfEvents /> component", () => {
   });
 
   test("render NumberOfEvents", () => {
-    expect(NumberOfEventsWrapper.find(".events-number")).toHaveLength(1);
+    expect(NumberOfEventsWrapper.find(".numbercount")).toHaveLength(1);
   });
   test("accurate input number of events", () => {
     let eventsNumber = NumberOfEventsWrapper.prop("numberOfEvents");
@@ -19,24 +19,23 @@ describe("<NumberOfEvents /> component", () => {
   });
   test("prevent negative number entries", () => {
     NumberOfEventsWrapper.setState({ numberOfEvents: 30 });
-    NumberOfEventsWrapper.find(".numberOfEvents").simulate("change", {
+    NumberOfEventsWrapper.find(".numberinput").simulate("change", {
       target: { value: -5 },
     });
   });
   test("prevent non number entries", () => {
     NumberOfEventsWrapper.setState({ numberOfEvents: 30 });
-    NumberOfEventsWrapper.find(".numberOfEvents").simulate("change", {
+    NumberOfEventsWrapper.find(".numberinput").simulate("change", {
       target: { value: "five" },
     });
   });
 
   test("able to update number of events", () => {
-    NumberOfEventsWrapper.find(".events-number").simulate("change", {
-      target: { value: 15 },
-    });
-    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual(15);
-  });
-  test("show number of events input label", () => {
-    expect(NumberOfEventsWrapper.find(".events-number")).toHaveLength(1);
+    const totalEventsObject = { target: { value: 15 } };
+    NumberOfEventsWrapper.find(".numberinput").simulate(
+      "change",
+      totalEventsObject
+    );
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toBe(15);
   });
 });

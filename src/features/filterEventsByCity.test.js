@@ -4,12 +4,13 @@ import App from "../App";
 import { mockData } from "../mock-data";
 import { extractLocations } from "../api";
 import { loadFeature, defineFeature } from "jest-cucumber";
+import { shallow, mount } from "enzyme";
 
-const feature = loadFeature("src/features/filterEventsByCity.test.js");
+const feature = loadFeature("./src/features/filerEventsByCity.feature");
 const locations = extractLocations(mockData);
 
 defineFeature(feature, (test) => {
-  test("When user has not searched for a city, show upcoming events from all cities", ({
+  test("When a user has not searched for a city, show upcoming events from all cities.", ({
     given,
     when,
     then,
@@ -22,7 +23,7 @@ defineFeature(feature, (test) => {
       Appwrapper = mount(<App />);
     });
 
-    then("the user should see the list of upcoming events", () => {
+    then("the user should see the list of upcoming events.", () => {
       Appwrapper.update();
       expect(Appwrapper.find(".event")).toHaveLength(mockData.length);
     });
@@ -48,7 +49,7 @@ defineFeature(feature, (test) => {
     });
 
     then(
-      "the user should receive a list of cities (suggestions) that match what they have typed",
+      "the user should receive a list of cities (suggestions) that match what they have typed.",
       () => {
         expect(CitySearchWrapper.find(".suggestions li")).toHaveLength(2);
       }
@@ -62,8 +63,7 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-
-    given("user was typing “Berlin” in the city textbox", async () => {
+    given("user was typing 'Berlin' in the city textbox", async () => {
       AppWrapper = await mount(<App />);
       AppWrapper.find(".city").simulate("change", {
         target: { value: "Berlin" },
@@ -76,14 +76,14 @@ defineFeature(feature, (test) => {
     });
 
     when(
-      "the user selects a city (e.g., “Berlin, Germany”) from the list",
+      "the user selects a city (e.g., 'Berlin, Germany') from the list",
       () => {
         AppWrapper.find(".suggestions li").at(0).simulate("click");
       }
     );
 
     then(
-      "their city should be changed to that city (i.e., “Berlin, Germany”)",
+      "their city should be changed to that city (i.e., 'Berlin, Germany')",
       () => {
         const CitySearchWrapper = AppWrapper.find(CitySearch);
         expect(CitySearchWrapper.state("query")).toBe("Berlin, Germany");
@@ -91,7 +91,7 @@ defineFeature(feature, (test) => {
     );
 
     and(
-      "the user should receive a list of upcoming events in that city",
+      "the user should receive a list of upcoming events in that city.",
       () => {
         expect(AppWrapper.find(".event")).toHaveLength(mockData.length);
       }
