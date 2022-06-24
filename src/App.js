@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: [30],
+    numberOfEvents: 30,
     location: "all",
   };
 
@@ -23,10 +23,6 @@ class App extends Component {
     this.mounted = true;
   }
 
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
   updateNumberOfEvents = (numberOfEvents) => {
     this.setState({
       numberOfEvents,
@@ -34,6 +30,10 @@ class App extends Component {
 
     this.updateEvents(this.state.locations, numberOfEvents);
   };
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
 
   updateEvents = (location, eventCount) => {
     const { currentLocation, numberOfEvents } = this.state;
@@ -67,6 +67,7 @@ class App extends Component {
       });
     }
   };
+
   render() {
     return (
       <div className="App">

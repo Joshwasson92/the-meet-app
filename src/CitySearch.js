@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class CitySearch extends Component {
   state = {
-    query: "",
+    query: "See all cities",
     suggestions: [],
     showSuggestions: undefined,
   };
@@ -14,7 +14,6 @@ class CitySearch extends Component {
     });
     this.setState({
       query: value,
-      showSuggestions: undefined,
       suggestions,
     });
   };
@@ -28,12 +27,13 @@ class CitySearch extends Component {
   };
 
   render() {
+    const { query } = this.state;
     return (
       <div className="CitySearch">
         <input
           type="text"
           className="city"
-          value={this.state.query}
+          value={query}
           onChange={this.handleInputChanged}
           onFocus={() => {
             this.setState({ showSuggestions: true });
