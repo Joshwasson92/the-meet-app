@@ -17,7 +17,7 @@ class CitySearch extends Component {
       suggestions,
     });
   };
-  handleItemClicked = (suggestion, eventCount) => {
+  handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
       showSuggestions: false,
@@ -51,7 +51,7 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li onClick={() => this.handleItemClicked("all")}>
+          <li key="all" onClick={() => this.handleItemClicked("all")}>
             <b>See all cities</b>
           </li>
         </ul>

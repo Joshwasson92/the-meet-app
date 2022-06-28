@@ -16,13 +16,11 @@ class App extends Component {
 
   async componentDidMount() {
     await getEvents().then((events) => {
-
       this.setState({
         events: events.events,
         locations: extractLocations(events.events),
         filteredEvents: this.state.events,
       });
-
     });
   }
 
@@ -94,7 +92,7 @@ class App extends Component {
         />
         <EventList events={this.state.events} />
         <NumberOfEvents
-          events={this.state.numberOfEvents}
+          events={this.state.events}
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />

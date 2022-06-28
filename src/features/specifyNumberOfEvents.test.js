@@ -40,7 +40,7 @@ defineFeature(feature, (test) => {
 
     then("The number of events displayed reflects the users choice.", () => {
       AppWrapper.update();
-      expect(AppWrapper.find(".event.id")).toHavLength(1);
+      expect(AppWrapper.find(".event")).toHaveLength(1);
     });
   });
 });

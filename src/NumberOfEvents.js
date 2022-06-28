@@ -5,6 +5,7 @@ class NumberOfEvents extends Component {
     super();
     this.state = {
       numberOfEvents: 30,
+      events: [],
     };
   }
 
