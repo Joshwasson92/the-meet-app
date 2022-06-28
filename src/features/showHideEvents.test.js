@@ -31,6 +31,39 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-    given("The user is logged in.] u");
+    given("The event description is hidden.", async () => {
+      AppWrapper = await mount(<App />);
+    });
+
+    when("The user selects show details.", () => {
+      AppWrapper.update();
+      expect(AppWrapper.find(".event-description")).toHaveLength(0);
+      AppWrapper.find(".show-button").at(0).simulate("click");
+    });
+
+    then("The description of the correct event will appear.", () => {
+      expect(AppWrapper.find(".event-description")).toHaveLength(1);
+    });
+  });
+
+  test("The user is able to hide details", ({ given, when, then }) => {
+    let AppWrapper;
+    given(
+      "The logged in user has selected Show Details previously.",
+      async () => {
+        AppWrapper = await mount(<App />);
+        AppWrapper.update();
+        AppWrapper.find(".show-button").at(0).simulate("click");
+      }
+    );
+
+    when("The user selects Hide Details.", () => {
+      AppWrapper.find(".show-button").at(0).simulate("click");
+      expect(AppWrapper.find(".event-description")).toHaveLength(0);
+    });
+
+    then("The details will collaspe and be no longer visible.", () => {
+      expect(AppWrapper.find(".event-description")).toHaveLength(0);
+    });
   });
 });

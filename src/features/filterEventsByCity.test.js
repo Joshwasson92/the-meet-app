@@ -72,7 +72,7 @@ defineFeature(feature, (test) => {
 
     and("the list of suggested cities is showing", () => {
       AppWrapper.update();
-      expect(AppWrapper.find(".suggestions li")).toHaveLength(1);
+      expect(AppWrapper.find(".event")).toHaveLength(1);
     });
 
     when(

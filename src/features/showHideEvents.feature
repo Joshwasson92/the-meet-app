@@ -6,11 +6,11 @@ Feature: Show and Hide Event details.
     Then The event description should be hidden.
 
   Scenario: When a user selects the show details, the description of the event should appear.
-    Given The user is logged in.
+    Given The event description is hidden.
     When The user selects show details.
     Then  The description of the correct event will appear.
 
   Scenario: The user is able to hide details
     Given The logged in user has selected Show Details previously.
     When The user selects Hide Details.
-    Then The details will collaspe and be no longer visible 
+    Then The details will collaspe and be no longer visible. 

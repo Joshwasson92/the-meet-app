@@ -17,7 +17,6 @@ class NumberOfEvents extends Component {
         numberOfEvents: "30",
         infoText: "Please enter a number from 1 to 30",
       });
-      console.log(this.state);
     } else {
       this.setState({
         numberOfEvents: value,

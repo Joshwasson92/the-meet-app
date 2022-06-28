@@ -17,16 +17,12 @@ const removeQuery = () => {
 };
 
 const extractLocations = (events) => {
-  console.log("extractLocations function fired", events);
-
   var extractingLocations = events.map((event) => event.location);
   var locations = [...new Set(extractingLocations)];
-  console.log("after extractingLocations is finished", extractingLocations);
   return locations;
 };
 
 const checkToken = async (accessToken) => {
-  console.log("checkToken call", accessToken);
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -64,7 +60,6 @@ const getEvents = async () => {
     const results = await axios.get(
       `https://jugcqqecm0.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`
     );
-    console.log(results);
     if (results.data) {
       var locations = extractLocations(results.data.events);
       localStorage.setItem("locations", JSON.stringify(locations));
