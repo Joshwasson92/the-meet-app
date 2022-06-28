@@ -4,6 +4,7 @@ import Event from "./Event";
 class EventList extends Component {
   state = {
     events: [],
+    filterEvents: [],
   };
   render() {
     const { events } = this.props;

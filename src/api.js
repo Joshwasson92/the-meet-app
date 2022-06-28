@@ -19,9 +19,9 @@ const removeQuery = () => {
 const extractLocations = (events) => {
   console.log("extractLocations function fired", events);
 
-  var extractLocations = events.map((events) => events.location);
-  var locations = [...new Set(extractLocations)];
-  console.log("after extractLocations is finished", extractLocations);
+  var extractingLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractingLocations)];
+  console.log("after extractingLocations is finished", extractingLocations);
   return locations;
 };
 
