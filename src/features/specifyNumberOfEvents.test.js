@@ -2,6 +2,7 @@ import App from "../App";
 import { loadFeature, defineFeature } from "jest-cucumber";
 import React from "react";
 import { mount } from "enzyme";
+import NumberOfEvents from "../NumberOfEvents";
 
 const feature = loadFeature("./src/features/specifyNumberOfEvents.feature");
 
@@ -39,8 +40,11 @@ defineFeature(feature, (test) => {
     });
 
     then("The number of events displayed reflects the users choice.", () => {
-      AppWrapper.update();
-      expect(AppWrapper.find(".event")).toHaveLength(1);
+      const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+      NumberOfEventsWrapper.find(".numberinput").simulate("change", {
+        target: { value: 1 },
+      });
+      expect(AppWrapper.state("numberOfEvents")).toEqual(1);
     });
   });
 });
