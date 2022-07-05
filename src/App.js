@@ -13,7 +13,6 @@ class App extends Component {
     locations: [],
     numberOfEvents: 30,
     location: "all",
-    offlineText: "",
   };
 
   async componentDidMount() {
