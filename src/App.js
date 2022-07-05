@@ -5,6 +5,7 @@ import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
+import { OfflineAlert } from "./Alert";
 
 class App extends Component {
   state = {
@@ -12,6 +13,7 @@ class App extends Component {
     locations: [],
     numberOfEvents: 30,
     location: "all",
+    offlineText: "",
   };
 
   async componentDidMount() {
@@ -22,6 +24,15 @@ class App extends Component {
         filteredEvents: this.state.events,
       });
     });
+    if (!navigator.onLine) {
+      this.setState({
+        offlineText: "No connection deleted, loading saved events.",
+      });
+    } else {
+      this.setState({
+        offlineText: "",
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -86,6 +97,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <OfflineAlert text={this.state.infoText} />
+
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
