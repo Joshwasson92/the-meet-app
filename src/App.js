@@ -6,6 +6,7 @@ import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
 import { OfflineAlert } from "./Alert";
+import EventGenre from "./EventGenre";
 
 import {
   ScatterChart,
@@ -132,6 +133,7 @@ class App extends Component {
         />
 
         <h4>Events in each city</h4>
+        <EventGenre events={this.state.events} />
         <ResponsiveContainer height={400}>
           <ScatterChart
             margin={{
