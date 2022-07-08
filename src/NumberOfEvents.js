@@ -22,7 +22,7 @@ class NumberOfEvents extends Component {
     } else {
       this.setState({
         numberOfEvents: value,
-        infoText: "Please enter a valid number",
+        infoText: "",
       });
     }
     if (this.props.updateNumberOfEvents) this.props.updateNumberOfEvents(value);

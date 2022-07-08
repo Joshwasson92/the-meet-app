@@ -94,10 +94,10 @@ class App extends Component {
             : response.events.filter(
                 (event) => event.location === currentLocation
               );
-        const events = locationEvents.slice(0, eventCount);
+        const events = locationEvents.slice(0, 30);
         return this.setState({
           events: events,
-          numberOfEvents: eventCount,
+          numberOfEvents: 30,
           locations: response.locations,
         });
       });
