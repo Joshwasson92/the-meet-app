@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Event from "./Event";
 
+/**
+ * Class Component to display event data.
+ */
 class EventList extends Component {
   state = {
     events: [],

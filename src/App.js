@@ -49,21 +49,10 @@ class App extends Component {
     this.mounted = false;
   }
 
-  // updateNumberOfEvents = (numberOfEvents) => {
-  //   if( event.target.value === ''){
-  //     this.setState({
-  //       filteredEvents : this.state.events
-  //     })
-  //   }
-
-  // else{
-  //   let newFilter = this.state.events.slice( 0, Number(event.target.value));
-  //   this.setState({
-  //     filterEvents : newFilter
-  //   })
-  //   }
-  // };
-
+  /**
+   * Updates the state based on the number of events selected.
+   * @param {number} numberOfEvents
+   */
   updateNumberOfEvents = (numberOfEvents) => {
     this.setState({
       numberOfEvents,
@@ -71,6 +60,11 @@ class App extends Component {
     this.updateEvents(this.state.locations, numberOfEvents);
   };
 
+  /**
+   * Pulls all events or filters depending on what has been entered into the location input field.
+   * @param {string} location
+   * @param {number} eventCount
+   */
   updateEvents = (location = "all", eventCount = this.state.numberOfEvents) => {
     const { currentLocation, numberOfEvents } = this.state;
     if (location) {
@@ -104,6 +98,10 @@ class App extends Component {
     }
   };
 
+  /**
+   *
+   * @returns events based on the location.
+   */
   getData = () => {
     const { locations, events } = this.state;
     const data = locations.map((location) => {

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
+/**
+ *
+ * @param {event} param0
+ * @returns Filters based on event genre selected.
+ */
 const EventGenre = ({ events }) => {
   const [data, setData] = useState([]);
 
@@ -19,6 +24,9 @@ const EventGenre = ({ events }) => {
     setData(() => getData());
   }, [events]);
 
+  /**
+   * Adds colors to each event.
+   */
   const colors = ["#003893", "#dd7500", "#e8250c", "#fd9994", "#ffd201"];
   const genreInfo = ({ x, y, cx, cy, name, percent, index }) => {
     return (

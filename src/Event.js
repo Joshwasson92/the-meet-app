@@ -5,6 +5,9 @@ class Event extends Component {
     collapsed: true,
   };
 
+  /**
+   * Function to display or hide a targetted event.
+   */
   handleShowClick = () => {
     this.state.collapsed
       ? this.setState({ collapsed: false })

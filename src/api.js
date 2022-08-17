@@ -2,6 +2,9 @@ import { mockData } from "./mock-data";
 import axios from "axios";
 import NProgress from "nprogress";
 
+/**
+ * Clears input field for location.
+ */
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
     var newurl =
@@ -16,12 +19,22 @@ const removeQuery = () => {
   }
 };
 
+/**
+ *
+ * @param {object} events
+ * @returns locations from each event.
+ */
 const extractLocations = (events) => {
   var extractingLocations = events.map((event) => event.location);
   var locations = [...new Set(extractingLocations)];
   return locations;
 };
 
+/**
+ * Checks oAuth token.
+ * @param {string} accessToken
+ * @returns  response in json format.
+ */
 const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
@@ -38,7 +51,6 @@ const checkToken = async (accessToken) => {
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
  */
-
 const getEvents = async () => {
   NProgress.start();
 
@@ -70,6 +82,10 @@ const getEvents = async () => {
   }
 };
 
+/**
+ * process to retreive a oauth token.
+ * @returns access token from oAuth
+ */
 const getAccessToken = async () => {
   const accessToken = await localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
@@ -90,6 +106,11 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
+/**
+ * Gets access token from local storage.
+ * @param {string} code
+ * @returns token
+ */
 const getToken = async (code) => {
   removeQuery();
   const encodeCode = encodeURIComponent(code);

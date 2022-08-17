@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+/**
+ * Class component for Alert notifications
+ */
 class Alert extends Component {
   constructor(props) {
     super(props);
@@ -21,24 +24,32 @@ class Alert extends Component {
   }
 }
 
+/**
+ * Blue snackbar
+ */
 class InfoAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = "blue";
   }
 }
-
+/**
+ * Red snackbar
+ */
 class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = "red";
   }
 }
+/**
+ * Offline red snackbar
+ */
 class OfflineAlert extends Alert {
-    constructor(props) {
-      super(props);
-      this.color = "red";
-    }
+  constructor(props) {
+    super(props);
+    this.color = "red";
+  }
 }
 
 export { InfoAlert, ErrorAlert, OfflineAlert };

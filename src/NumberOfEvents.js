@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { ErrorAlert } from "./Alert";
 
+/**
+ * Class component for updating total number of events that can be viewed.
+ */
 class NumberOfEvents extends Component {
   constructor() {
     super();
@@ -11,6 +14,10 @@ class NumberOfEvents extends Component {
     };
   }
 
+  /**
+   * Updates the state when the number of viewable events is changed.
+   * @param {event} event
+   */
   handleInputChanged = (event) => {
     const value = event.target.value;
 

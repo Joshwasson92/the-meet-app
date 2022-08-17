@@ -7,6 +7,10 @@ class CitySearch extends Component {
     showSuggestions: undefined,
   };
 
+  /**
+   * Function to changing of locations.
+   * @param {event} event
+   */
   handleInputChanged = (event) => {
     const value = event.target.value;
     const suggestions = this.props.locations.filter((locations) => {
@@ -26,6 +30,10 @@ class CitySearch extends Component {
       });
     }
   };
+  /**
+   * Function to display suggested events.
+   * @param {string} suggestion
+   */
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
